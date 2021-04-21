@@ -21,3 +21,7 @@ class GenreDetailView(generic.DetailView):
 
 class StudioListView(generic.ListView):
     model = Studio
+
+
+class StudioDetailView(generic.DetailView):
+    model = Studio

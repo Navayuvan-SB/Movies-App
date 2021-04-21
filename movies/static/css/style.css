@@ -156,6 +156,18 @@ ul.sidebar-nav {
   font-weight: 600;
 }
 
+.icon-href {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.icon-href a {
+  margin-left: 5px;
+  color: #dfdfdf;
+}
+
 .c-primary {
   color: var(--primary);
 }
