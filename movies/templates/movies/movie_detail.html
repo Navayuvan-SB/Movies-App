@@ -1,11 +1,93 @@
 {% extends 'base_generic.html' %} 
-
-{% block title %} {{movie.title}} {% endblock title %}
-
+{% block title %} {{movie.title}} 
+{% endblock title %} 
 
 {% block content %}
 
-{{movie.title}}
-    
+<div class="row">
+  <div class="col-md-4">
+    <img class="w-90p h-100p obj-fit-cover" src="{{movie.cover_image.url}}" alt="{{movie.title}}" />
+  </div>
+
+  <div class="col-md-6">
+
+    <div>
+        <h1 class="fs-2-4 c-primary fw-700">{{movie.title}} - <span class="fw-600">{{movie.prefix}}</span> </h1>
+        <p class="c-text-secondary">{{movie.sub_title}}</p>
+    </div>
+
+    <div class="mx-2">
+
+        <h3 class="c-light-primary">Genre</h3>
+        
+        <div class="pill-wrapper">
+        {% for genre in movie.genre.all %}
+
+            <p class="pill bg-primary c-white">{{genre.title}}</p>
+            
+        {% endfor %}
+        </div>
+            
+    </div>
+
+    <div class="mx-2">
+
+        <h3 class="c-light-primary">Directors</h3>
+        
+        <div class="pill-wrapper">
+        {% for director in movie.directors.all %}
+
+            <p class="pill bg-primary c-white">{{director.first_name}} {{director.last_name}}</p>
+            
+        {% endfor %}
+        </div>
+
+
+    </div>
+
+    <div class="mx-2">
+        <h3 class="c-light-primary">Studio</h3>
+        <p class="c-text-secondary">{{movie.studio.title}}</p>
+    </div>
+
+    <p class="c-text-secondary">Release date: <span class="fw-600">{{movie.release_date}}</span> </p>
+    <p class="c-text-secondary">Amazon URL: <span class="fw-600">{{movie.amazon_url}}</span> </p>
+
+
+
+  </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+
+    </div>
+
+    <div class="col-md-6">
+        <hr>
+
+        <h3 class="mx-2 c-light-primary">Reviews</h3>
+        <div>
+
+            
+            {% for review in movie.review_set.all %}
+
+            <div class="mx-2">
+
+                <h4 class="c-text-secondary fw-600">{{review.name}}</h4>
+                <p class="c-text-secondary">{{review.text}}</p>
+
+            </div>
+                
+            {% endfor %}
+                
+
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock content %}
-    
