@@ -5,6 +5,9 @@
   --tertiary: #1f4068;
   --secondary: #162447;
   --primary: #e43f5a;
+  --text-secondary: #6679aa;
+  --light-primary: #b85464;
+  --bg-primary: #e4586f;
 }
 
 * {
@@ -145,4 +148,81 @@ ul.sidebar-nav {
   color: #fff;
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.c-primary {
+  color: var(--primary);
+}
+
+.c-text-secondary {
+  color: var(--text-secondary);
+}
+
+.c-tertiary {
+  color: var(--tertiary);
+}
+
+.c-light-primary {
+  color: var(--light-primary);
+}
+
+.bg-light-primary {
+  background-color: var(--light-primary);
+}
+
+.bg-primary {
+  background-color: var(--bg-primary) !important;
+}
+
+.c-white {
+  color: #fff;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fs-2-4 {
+  font-size: 2.4rem;
+}
+
+.mx-4 {
+  margin: 4rem 0;
+}
+
+.mx-2 {
+  margin: 2rem 0 !important;
+}
+
+.pill-wrapper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.pill {
+  padding: 5px 8px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+.w-90p {
+  width: 90%;
+}
+
+.h-100p {
+  height: 100%;
+}
+
+.obj-fit-cover {
+  object-fit: cover;
+}
+
+
+hr {
+  background-color: var(--light-primary);
 }
