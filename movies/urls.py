@@ -10,4 +10,5 @@ urlpatterns = [
     path(
         "studios/<slug:slug>/", views.StudioDetailView.as_view(), name="studio-detail"
     ),
+    path("directors/", views.DirectorListView.as_view(), name="directors"),
 ]

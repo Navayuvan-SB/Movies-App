@@ -1,0 +1,32 @@
+{% extends 'base_generic.html' %} {% block title %} Directors {% endblock title %}
+{% block content %}
+
+
+<div class="row">
+
+
+    <div class="col-md-12">
+
+        <div class="inner-header">
+
+            <h1>Directors</h1>
+
+        </div>
+
+    </div>
+
+  <div class="col-md-12">
+    <ul class="list">
+
+        
+        {% for director in director_list %}
+            <li class="bottom-border">
+                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="">{{director}}</a>
+            </li>
+        {% endfor %}
+     
+    </ul>
+  </div>
+</div>
+
+{% endblock content %}
