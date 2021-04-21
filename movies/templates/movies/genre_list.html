@@ -21,7 +21,7 @@
         
         {% for genre in genre_list %}
             <li class="bottom-border">
-                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="">{{genre.title}}</a>
+                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="{% url 'genre-detail' genre.slug %}">{{genre.title}}</a>
             </li>
         {% endfor %}
      

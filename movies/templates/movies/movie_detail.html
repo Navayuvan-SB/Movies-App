@@ -23,7 +23,7 @@
         <div class="pill-wrapper">
         {% for genre in movie.genre.all %}
 
-            <p class="pill bg-primary c-white">{{genre.title}}</p>
+            <a href="{% url 'genre-detail' genre.slug %}" class="no-hover-effect"><p class="pill bg-primary c-white">{{genre.title}}</p></a>
             
         {% endfor %}
         </div>
