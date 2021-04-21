@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+* {
+  font-family: "Quicksand", sans-serif;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+  border: none;
+  background-color: #f2f2f2;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+button {
+  outline: none;
+  border: none;
+  padding: 10px 30px;
+  background-color: #f2f2f2;
+}
+
+.sidebar-nav {
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.sidebar-nav li a,
+.user-wrapper a {
+  margin: 0 1.4rem;
+  color: #424242;
+  font-weight: 600;
+}
+
+.user-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.user-wrapper svg {
+  margin-right: 5px;
+}
+
+.user-wrapper p {
+  line-height: 0;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.padding-top-1 {
+  padding-top: 1rem;
+}
