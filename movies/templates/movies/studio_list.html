@@ -1,4 +1,4 @@
-{% extends 'base_generic.html' %} {% block title %} Genres {% endblock title %}
+{% extends 'base_generic.html' %} {% block title %} Studios {% endblock title %}
 {% block content %}
 
 
@@ -21,7 +21,7 @@
         
         {% for studio in studio_list %}
             <li class="bottom-border">
-                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="">{{studio.title}}</a>
+                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="{% url 'studio-detail' studio.slug %}">{{studio.title}}</a>
             </li>
         {% endfor %}
      

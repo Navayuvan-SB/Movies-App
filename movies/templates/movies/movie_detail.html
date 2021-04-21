@@ -47,7 +47,7 @@
 
     <div class="mx-2">
         <h3 class="c-light-primary">Studio</h3>
-        <p class="c-text-secondary">{{movie.studio.title}}</p>
+        <a href="{% url 'studio-detail' movie.studio.slug %}"><p class="c-text-secondary">{{movie.studio.title}}</p></a>
     </div>
 
     <p class="c-text-secondary">Release date: <span class="fw-600">{{movie.release_date}}</span> </p>
