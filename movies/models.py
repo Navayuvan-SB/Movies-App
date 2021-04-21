@@ -1,5 +1,5 @@
 from django.db import models
-
+from model_utils.models import TimeStampedModel
 
 class Studio(models.Model):
     title = models.CharField(max_length=100, verbose_name="Studio Name")
@@ -58,3 +58,10 @@ class Movie(models.Model):
         return self.asin
 
     amazon_url = property(_get_amazon_url)
+
+
+class Review(TimeStampedModel):
+
+    name = models.CharField(max_length=100, verbose_name="Reviewer name", default=None, null=True)
+    text = models.CharField(max_length=512, verbose_name="Review text", default=None, null=True)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
