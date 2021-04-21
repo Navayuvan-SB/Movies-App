@@ -37,7 +37,7 @@
         <div class="pill-wrapper">
         {% for director in movie.directors.all %}
 
-            <p class="pill bg-primary c-white">{{director.first_name}} {{director.last_name}}</p>
+            <a href="{% url 'director-detail' director.slug %}"><p class="pill bg-primary c-white">{{director.first_name}} {{director.last_name}}</p></a>
             
         {% endfor %}
         </div>

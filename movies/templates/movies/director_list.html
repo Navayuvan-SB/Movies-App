@@ -21,7 +21,7 @@
         
         {% for director in director_list %}
             <li class="bottom-border">
-                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="">{{director}}</a>
+                <a class="fs-1-2 c-light-primary fw-600 hover-none hover-c-primary" href="{% url 'director-detail' director.slug %}">{{director}}</a>
             </li>
         {% endfor %}
      
