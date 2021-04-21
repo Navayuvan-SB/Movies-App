@@ -1,6 +1,7 @@
 from django.db import models
 from model_utils.models import TimeStampedModel
 
+
 class Studio(models.Model):
     title = models.CharField(max_length=100, verbose_name="Studio Name")
     prefix = models.CharField(max_length=10)
@@ -15,6 +16,10 @@ class Genre(models.Model):
     title = models.CharField(max_length=100, verbose_name="Genre Name")
     slug = models.SlugField(verbose_name="URL Param")
 
+    def __str__(self):
+        return self.title
+    
+
 
 class Director(models.Model):
     first_name = models.CharField(max_length=100)
@@ -27,11 +32,15 @@ class Director(models.Model):
     website = models.URLField()
 
     GENDER = (
-        ('1', "Male"),
-        ('2', "Female"),
-        ('3', "Unspecified"),
+        ("1", "Male"),
+        ("2", "Female"),
+        ("3", "Unspecified"),
     )
-    gender = models.CharField(max_length=2, choices=GENDER, default='1')
+    gender = models.CharField(max_length=2, choices=GENDER, default="1")
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
 
 
 class Movie(models.Model):
@@ -43,14 +52,14 @@ class Movie(models.Model):
     slug = models.SlugField(verbose_name="Movie URL Param")
 
     release_date = models.DateField()
-    cover_image = models.ImageField(upload_to='movies')
+    cover_image = models.ImageField(upload_to="movies/images")
 
     asin = models.CharField(
-        max_length=12, verbose_name="Amazon Standard Identification Number")
-    genre = models.ManyToManyField(Genre, help_text='Genres of the movie')
+        max_length=12, verbose_name="Amazon Standard Identification Number"
+    )
+    genre = models.ManyToManyField(Genre, help_text="Genres of the movie")
 
-    directors = models.ManyToManyField(
-        Director, help_text='Directors of the movie')
+    directors = models.ManyToManyField(Director, help_text="Directors of the movie")
 
     studio = models.ForeignKey(Studio, on_delete=models.SET_NULL, null=True)
 
@@ -60,8 +69,21 @@ class Movie(models.Model):
     amazon_url = property(_get_amazon_url)
 
 
+    def __str__(self):
+        return self.title
+    
+
+
 class Review(TimeStampedModel):
 
-    name = models.CharField(max_length=100, verbose_name="Reviewer name", default=None, null=True)
-    text = models.CharField(max_length=512, verbose_name="Review text", default=None, null=True)
+    name = models.CharField(
+        max_length=100, verbose_name="Reviewer name", default=None, null=True
+    )
+    text = models.CharField(
+        max_length=512, verbose_name="Review text", default=None, null=True
+    )
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
