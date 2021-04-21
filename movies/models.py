@@ -32,3 +32,29 @@ class Director(models.Model):
         ('3', "Unspecified"),
     )
     gender = models.CharField(max_length=2, choices=GENDER, default='1')
+
+
+class Movie(models.Model):
+
+    title = models.CharField(max_length=100, verbose_name="Movie Name")
+    sub_title = models.CharField(max_length=100)
+    prefix = models.CharField(max_length=10)
+
+    slug = models.SlugField(verbose_name="Movie URL Param")
+
+    release_date = models.DateField()
+    cover_image = models.ImageField(upload_to='movies')
+
+    asin = models.CharField(
+        max_length=12, verbose_name="Amazon Standard Identification Number")
+    genre = models.ManyToManyField(Genre, help_text='Genres of the movie')
+
+    directors = models.ManyToManyField(
+        Director, help_text='Directors of the movie')
+
+    studio = models.ForeignKey(Studio, on_delete=models.SET_NULL, null=True)
+
+    def _get_amazon_url(self):
+        return self.asin
+
+    amazon_url = property(_get_amazon_url)
