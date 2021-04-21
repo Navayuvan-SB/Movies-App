@@ -103,7 +103,7 @@ class MovieDetailViewTest(TestCase):
         self.assertContains(response, "Movie Name 1")
 
 
-class GenreListView(TestCase):
+class GenreListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
 
@@ -127,3 +127,34 @@ class GenreListView(TestCase):
     def test_view_render_all_movies(self):
         response = self.client.get(reverse("genres"))
         self.assertEqual(len(response.context["genre_list"]), 10)
+
+
+class GenreDetailViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Genre.objects.create(title="Genre 1", slug="genre-1")
+        Genre.objects.create(title="Genre 2", slug="genre-2")
+
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/movies/genres/genre-1/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "movies/genre_detail.html")
+
+    def test_view_displays_correct_movie(self):
+        response = self.client.get(
+            reverse("genre-detail", kwargs={"slug": "genre-1"})
+        )
+        self.assertContains(response, "Genre 1")
