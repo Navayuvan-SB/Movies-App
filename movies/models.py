@@ -1,3 +1,12 @@
 from django.db import models
 
-# Create your models here.
+class Studio(models.Model):
+    title = models.CharField(max_length=100, verbose_name="Studio Name")
+    prefix = models.CharField(max_length=10)
+    website = models.URLField()
+    slug = models.SlugField(verbose_name='URL Param')
+
+    def __str__(self):
+        return self.title
+    
+
