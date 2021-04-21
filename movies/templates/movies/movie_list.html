@@ -1,0 +1,17 @@
+{% extends 'base_generic.html' %} {% block title %} Movies {% endblock title %}
+
+
+{% block content %}
+
+<ul>
+  {% for movie in movie_list %}
+  <li>{{movie.title}}</li>
+
+  {% empty %}
+
+  <p>No movies found!</p>
+
+  {% endfor %}
+</ul>
+
+{% endblock content %}
