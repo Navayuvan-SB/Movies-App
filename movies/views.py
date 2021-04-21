@@ -29,3 +29,7 @@ class StudioDetailView(generic.DetailView):
 
 class DirectorListView(generic.ListView):
     model = Director
+
+
+class DirectorDetailView(generic.DetailView):
+    model = Director

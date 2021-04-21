@@ -1,0 +1,76 @@
+{% extends 'base_generic.html' %} 
+{% block title %} {{director}} {% endblock title %}
+
+
+{% block content %}
+
+<div class="inner-heading">
+    <h1 class="c-primary">{{ director }}</h1>
+</div>
+
+<div class="row movies">
+
+    <div class="col-md-12">
+
+      <div class="mx-2">
+
+        <h3 class="c-light-primary">Personal Info</h3>
+        
+        <div class="pill-wrapper">
+            <p class="pill bg-primary c-white">{{director.get_gender_display}}</p>
+            <p class="pill bg-primary c-white">Date of Birth: {{director.date_of_birth}}</p>
+        </div>
+            
+      </div>
+
+      <div class="mx-2">
+
+        <h3 class="c-light-primary">Contact</h3>
+        
+        <div class="pill-wrapper">
+            <a href="{{director.website}}" class="no-hover-effect">
+              <p class="pill bg-primary c-white flex-center"> 
+                <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#f2f2f2"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM4 12c0-.61.08-1.21.21-1.78L8.99 15v1c0 1.1.9 2 2 2v1.93C7.06 19.43 4 16.07 4 12zm13.89 5.4c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41C17.92 5.77 20 8.65 20 12c0 2.08-.81 3.98-2.11 5.4z"/></svg>
+                 Website
+              </p>
+            </a> 
+            <p class="pill bg-primary c-white flex-center"> 
+              <svg class="mr-1" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 0 24 24" width="20px" fill="#f2f2f2"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z"/></svg>
+               {{director.phone_number}}
+            </p>
+        </div>
+            
+      </div>
+
+    </div>
+
+    <div class="col-md-12">
+        <h3 class="mg-b-2 c-light-primary">Movies</h3>
+    </div>
+
+    {% for movie in director.movie_set.all %}
+    
+    <div class="col-md-4">
+  
+      <a href="{% url 'movie-detail' movie.slug %}" class="movie-wrapper">
+  
+        <img src="{{movie.cover_image.url}}" alt="Movie">
+        <h3>{{movie.title}}</h3>
+        <p>{{movie.prefix}}</p>
+  
+        <div class="overlay"></div>
+  
+      </a>
+  
+    </div>
+    
+  
+    {% empty %}
+  
+    <p>No movies found!</p>
+  
+    {% endfor %}
+  </div>
+    
+{% endblock content %}
+    
