@@ -18,7 +18,6 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.title
-    
 
 
 class Director(models.Model):
@@ -31,6 +30,8 @@ class Director(models.Model):
 
     website = models.URLField()
 
+    slug = models.SlugField(default=None, null=True)
+
     GENDER = (
         ("1", "Male"),
         ("2", "Female"),
@@ -40,7 +41,6 @@ class Director(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
-    
 
 
 class Movie(models.Model):
@@ -68,10 +68,8 @@ class Movie(models.Model):
 
     amazon_url = property(_get_amazon_url)
 
-
     def __str__(self):
         return self.title
-    
 
 
 class Review(TimeStampedModel):
@@ -86,4 +84,3 @@ class Review(TimeStampedModel):
 
     def __str__(self):
         return self.name
-    
