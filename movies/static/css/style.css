@@ -8,6 +8,7 @@
   --text-secondary: #6679aa;
   --light-primary: #b85464;
   --bg-primary: #e4586f;
+  --bottom-border: #79434c;
 }
 
 * {
@@ -150,6 +151,11 @@ ul.sidebar-nav {
   font-weight: 600;
 }
 
+.inner-header h1 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
 .c-primary {
   color: var(--primary);
 }
@@ -190,6 +196,14 @@ ul.sidebar-nav {
   font-size: 2.4rem;
 }
 
+.fs-1-4 {
+  font-size: 1.4rem;
+}
+
+.fs-1-2 {
+  font-size: 1.2rem;
+}
+
 .mx-4 {
   margin: 4rem 0;
 }
@@ -222,7 +236,28 @@ ul.sidebar-nav {
   object-fit: cover;
 }
 
-
 hr {
   background-color: var(--light-primary);
 }
+
+.list {
+  list-style: none;
+}
+
+.hover-c-primary:hover {
+  color: var(--primary);
+}
+
+.bottom-border {
+  border-bottom: 1px solid var(--bottom-border);
+}
+
+.list li {
+  padding: 20px 15px;
+  margin: 15px 0;
+}
+
+.list li a {
+  text-decoration: none;
+}
+

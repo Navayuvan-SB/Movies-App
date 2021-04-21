@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Movie
+from .models import Movie, Genre
 
 
 class MovieListView(generic.ListView):
@@ -9,3 +9,7 @@ class MovieListView(generic.ListView):
 
 class MovieDetailView(generic.DetailView):
     model = Movie
+
+
+class GenreListView(generic.ListView):
+    model = Genre
