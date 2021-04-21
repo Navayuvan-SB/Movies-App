@@ -85,7 +85,7 @@ ul.sidebar-nav {
 }
 
 .sidebar-nav li a {
-  margin: 0 1.4rem;
+  margin: 0 0.5rem;
   color: #424242;
   font-weight: 600;
   padding: 10px 20px;
@@ -266,5 +266,11 @@ hr {
 }
 
 .list li a {
+  text-decoration: none;
+}
+
+
+.no-hover-effect:hover {
+  text-transform: none;
   text-decoration: none;
 }
