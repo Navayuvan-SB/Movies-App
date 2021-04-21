@@ -2,6 +2,7 @@ from django.test import TestCase
 from movies.models import Movie, Genre, Director, Studio, Review
 from django.urls import reverse
 
+
 class MovieListViewTest(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -34,4 +35,41 @@ class MovieListViewTest(TestCase):
 
     def test_view_render_all_movies(self):
         response = self.client.get(reverse("movies"))
-        self.assertEqual(len(response.context['movie_list']), 10)
+        self.assertEqual(len(response.context["movie_list"]), 10)
+
+
+class MovieDetailViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Movie.objects.create(
+            title="Movie Name 1",
+            prefix="Prefix",
+            sub_title="Sub title",
+            asin="1hfj12314h",
+            release_date="2021-09-21",
+        )
+
+        Movie.objects.create(
+            title="Movie Name 2",
+            prefix="Prefix",
+            sub_title="Sub title",
+            asin="1hfj12314h",
+            release_date="2021-09-21",
+        )
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/movies/1")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "movies/movie_detail.html")
+
+    def test_view_displays_correct_movie(self):
+        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        self.assertContains(response, "Movie Name 1")
