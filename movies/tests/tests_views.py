@@ -1,6 +1,7 @@
 from django.test import TestCase
 from movies.models import Movie, Genre, Director, Studio, Review
 from django.urls import reverse
+from django.core.files import File
 
 
 class MovieListViewTest(TestCase):
@@ -14,6 +15,13 @@ class MovieListViewTest(TestCase):
                 sub_title="Sub title {movie_id}",
                 asin="1hfj12314h",
                 release_date="2021-09-21",
+                slug="movie-name",
+                cover_image=File(
+                    open(
+                        "/home/hp/My_works/django/moviesapp/movies/images/mortal-kombat.jpg",
+                        "rb",
+                    )
+                ),
             )
 
     def test_view_url_exists_at_desired_location(self):
@@ -47,6 +55,13 @@ class MovieDetailViewTest(TestCase):
             sub_title="Sub title",
             asin="1hfj12314h",
             release_date="2021-09-21",
+            slug="movie-name-1",
+            cover_image=File(
+                open(
+                    "/home/hp/My_works/django/moviesapp/movies/images/mortal-kombat.jpg",
+                    "rb",
+                )
+            ),
         )
 
         Movie.objects.create(
@@ -55,21 +70,34 @@ class MovieDetailViewTest(TestCase):
             sub_title="Sub title",
             asin="1hfj12314h",
             release_date="2021-09-21",
+            slug="movie-name-2",
+            cover_image=File(
+                open(
+                    "/home/hp/My_works/django/moviesapp/movies/images/mortal-kombat.jpg",
+                    "rb",
+                )
+            ),
         )
 
     def test_view_url_exists_at_desired_location(self):
-        response = self.client.get("/movies/1")
+        response = self.client.get("/movies/movie-name-1/")
         self.assertEqual(response.status_code, 200)
 
     def test_url_accessible_by_name(self):
-        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("movie-detail", kwargs={"slug": "movie-name-1"})
+        )
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("movie-detail", kwargs={"slug": "movie-name-1"})
+        )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, "movies/movie_detail.html")
 
     def test_view_displays_correct_movie(self):
-        response = self.client.get(reverse("movie-detail", kwargs={"pk": 1}))
+        response = self.client.get(
+            reverse("movie-detail", kwargs={"slug": "movie-name-1"})
+        )
         self.assertContains(response, "Movie Name 1")
