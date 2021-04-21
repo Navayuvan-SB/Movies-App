@@ -244,3 +244,43 @@ class DirectorListViewTest(TestCase):
     def test_view_render_all_movies(self):
         response = self.client.get(reverse("directors"))
         self.assertEqual(len(response.context["director_list"]), 10)
+
+
+class DirectorDetailViewTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        number_of_directors = 2
+        for director_id in range(number_of_directors):
+            Director.objects.create(
+                first_name=f"first director {director_id}",
+                last_name=f"last director {director_id}",
+                middle_name=f"middle director {director_id}",
+                phone_number="9897867565",
+                date_of_birth="1970-06-11",
+                website="https://google.co.in",
+                gender="1",
+                slug=f"director-{director_id}",
+            )
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/movies/directors/director-1/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(
+            reverse("director-detail", kwargs={"slug": "director-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(
+            reverse("director-detail", kwargs={"slug": "director-1"})
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "movies/director_detail.html")
+
+    def test_view_displays_correct_movie(self):
+        response = self.client.get(
+            reverse("director-detail", kwargs={"slug": "director-1"})
+        )
+        self.assertContains(response, "first director 1")
