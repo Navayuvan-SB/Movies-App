@@ -23,23 +23,36 @@
   </head>
 
   <body>
-    <div class="container">
-      <div class="row">
-        {% block sidebar %}
 
-        <div class="col-sm-12 padding-top-1">
+    {% block sidebar %}
+        <div class="header">
+
+          <div class="brand">
+
+            <img src="https://www.iconpacks.net/icons/1/free-movie-icon-850-thumb.png" alt="">
+            <h3>Movies App</h3>
+
+          </div>
+
           <ul class="sidebar-nav">
             <li>
               <a href="{% url 'movies' %}">Movies</a>
             </li>
           </ul>
         </div>
+    {% endblock %}
 
-       
-        {% endblock %}
-
-        <div class="col-sm-12 padding-top-1">
-          {% block content %}{% endblock %} {% block pagination %} 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 default-padding">
+          {% block content %}
+          
+          
+          
+          {% endblock %}
+          
+          
+          {% block pagination %} 
           {% if is_paginated %}
 
           <div class="pagination">
