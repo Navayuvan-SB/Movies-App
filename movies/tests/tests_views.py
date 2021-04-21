@@ -80,7 +80,7 @@ class MovieDetailViewTest(TestCase):
         )
 
     def test_view_url_exists_at_desired_location(self):
-        response = self.client.get("/movies/movie-name-1/")
+        response = self.client.get("/movies/movie/movie-name-1/")
         self.assertEqual(response.status_code, 200)
 
     def test_url_accessible_by_name(self):
@@ -101,3 +101,29 @@ class MovieDetailViewTest(TestCase):
             reverse("movie-detail", kwargs={"slug": "movie-name-1"})
         )
         self.assertContains(response, "Movie Name 1")
+
+
+class GenreListView(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+
+        number_of_genres = 10
+        for genre_id in range(number_of_genres):
+            Genre.objects.create(title=f"Genre {genre_id}", slug=f"genre-{genre_id}")
+
+    def test_view_url_exists_at_desired_location(self):
+        response = self.client.get("/movies/genres/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_url_accessible_by_name(self):
+        response = self.client.get(reverse("genres"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_view_uses_correct_template(self):
+        response = self.client.get(reverse("genres"))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "movies/genre_list.html")
+
+    def test_view_render_all_movies(self):
+        response = self.client.get(reverse("genres"))
+        self.assertEqual(len(response.context["genre_list"]), 10)
