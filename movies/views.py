@@ -13,3 +13,7 @@ class MovieDetailView(generic.DetailView):
 
 class GenreListView(generic.ListView):
     model = Genre
+
+
+class GenreDetailView(generic.DetailView):
+    model = Genre
